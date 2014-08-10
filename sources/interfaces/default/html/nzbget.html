@@ -1,0 +1,56 @@
+<%inherit file="base.html"/>
+<% settings = self.attr.settings %>
+<div class="container">
+    <div class="content maincontent">
+        <h1 class="page-header page-title">
+            <a href="http://${settings.get('nzbget_host')}:${settings.get('nzbget_port') + settings.get('nzbget_basepath')}" target="_blank" title="Open original NZBGet interface">${settings.get('nzbget_name', 'NZBGet')}</a>
+            <small>
+                <strong>Speed:</strong> <span id="queue_speed"></span>
+                <!-- <strong>Status:</strong> <span id="queue_state"></span> -->
+            </small>
+        </h1>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#active" data-toggle="tab">Active</a></li>
+            <li><a href="#history" data-toggle="tab">History</a></li>
+            <li><a href="#warnings" data-toggle="tab">Warnings</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="active">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>File</th>
+                        <th>Progress</th>
+                        <th>Remaining</th>
+                    </tr>
+                    </thead>
+                    <tbody id="active_table_body"></tbody>
+                </table>
+            </div>
+            <div id="history" class="tab-pane">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Size</th>
+                    </tr>
+                    </thead>
+                    <tbody id="history_table_body"></tbody>
+                </table>
+            </div>
+            <div id="warnings" class="tab-pane">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Warnings</th>
+                    </tr>
+                    </thead>
+                    <tbody id="warning_table_body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
