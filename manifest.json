@@ -1,9 +1,9 @@
 {
-  "name": "Cops",
-  "id": "cops",
+  "name": "HTPC",
+  "id": "htpc",
   "description": {
-    "en": "Web access to a Calibre library",
-    "fr": "Acces web à une librairie Calibre"
+    "en": "HTPC Manager, frontend to manage Sickbeard, Transmission, XBMC ...",
+    "fr": "HTPC Manager, frontal pour gérer Sickbeard, Transmission, XBMC ..."
   },
   "developer": {
     "name": "lunarok",
@@ -16,17 +16,33 @@
       {
         "name": "domain",
         "ask": {
-          "en": "Choose a domain for Cops"
+          "en": "Choose a domain for HTPC"
         },
         "example": "domain.org"
       },
       {
         "name": "path",
         "ask": {
-          "en": "Choose a path for Cops"
+          "en": "Choose a path for HTPC"
         },
-        "example": "/cops",
-        "default": "/cops"
+        "example": "/htpc",
+        "default": "/htpc"
+      },
+      {
+        "name": "ip",
+        "ask": {
+          "en": "Choose host for app, if you keep default 127.0.0.1, app will be installed on Yunohost during the process"
+        },
+        "example": "192.168.0.101",
+        "default": "127.0.0.1"
+      },
+      {
+        "name": "port",
+        "ask": {
+          "en": "Choose the listening port of the app (not used if it's a local installation)"
+        },
+        "example": "8085",
+        "default": "8085"
       }
     ]
   }
