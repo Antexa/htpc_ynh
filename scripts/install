@@ -4,42 +4,32 @@
 domain=$1
 path=$2
 ip=$3
+port=$4
+app=htpc
 
 sudo yunohost app checkurl $domain$path -a cops
 if [[ ! $? -eq 0 ]]; then
   exit 1
 fi
 
-sudo apt-get install php5-gd php5-sqlite -y
-
-# Copy of sources files
-final_path=/var/www/cops
-sudo mkdir -p $final_path
-sudo cp -a ../sources/* $final_path
-sudo mkdir $final_path/tmp
-sudo chmod 775 -R $final_path
-sudo chown -R www-data:www-data $final_path
-
-# Prepare data directory
-data_path=/home/yunohost.app/cops
-sudo mkdir -p $data_path
-sudo chown -hR www-data:www-data $data_path
-sudo chown www-data:www-data $data_path
-sudo chmod 755 $data_path
-sudo chmod -R 770 $data_path
+# Copy of app for localhost installation
+if [[ $ip -eq '127.0.0.1' ]]; then
+  sudo apt-get install libjpeg libjpeg-dev libpng-dev libfreetype6 libfreetype6-dev zlib1g-dev -y
+  sudo apt-get install python-pip -y
+  sudo pip install PIL
+  final_path=/opt/$app
+  sudo mkdir -p $final_path
+  sudo cp -a ../sources/* $final_path
+  sudo cp -a ../conf/$app /etc/init.d/
+  sudo chmod +x /etc/init.d/$app
+  sudo sed -i "s@PATHTOCHANGE@$path@g" /etc/init.d/$app
+  sudo update-rc.d /etc/init.d/$app defaults
+  sudo service $app start
+fi
 
 # Configure Nginx and reload
+sudo sed -i "s@IPTOCHANGE@$IP@g" ../conf/nginx.conf
+sudo sed -i "s@PORT@$port@g" ../conf/nginx.conf
 sudo sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
-sudo sed -i "s@ALIASTOCHANGE@$final_path/@g" ../conf/nginx.conf
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/cops.conf
+sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
-
-# Configure COPS
-sudo cp ../conf/config_local.php $final_path/config_local.php
-sudo sed -i "s@DATAPATH@$data_path@g" $final_path/config_local.php
-sudo chown www-data:www-data $final_path/config_local.php
-
-# Configure PAM
-sudo cp ../conf/nginx.pam /etc/pam.d/nginx
-sudo chmod 644 /etc/pam.d/nginx
-sudo chown root:root /etc/pam.d/nginx
