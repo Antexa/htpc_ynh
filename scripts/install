@@ -7,7 +7,7 @@ ip=$3
 port=$4
 app=htpc
 
-sudo yunohost app checkurl $domain$path -a cops
+sudo yunohost app checkurl $domain$path -a $app
 if [[ ! $? -eq 0 ]]; then
   exit 1
 fi
