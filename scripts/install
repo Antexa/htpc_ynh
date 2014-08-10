@@ -13,7 +13,7 @@ if [[ ! $? -eq 0 ]]; then
 fi
 
 # Copy of app for localhost installation
-if [[ $ip -eq '127.0.0.1' ]]; then
+if [[ $ip == "127.0.0.1" ]]; then
   sudo apt-get install libjpeg libjpeg-dev libpng-dev libfreetype6 libfreetype6-dev zlib1g-dev -y
   sudo apt-get install python-pip -y
   sudo pip install PIL
@@ -28,7 +28,7 @@ if [[ $ip -eq '127.0.0.1' ]]; then
 fi
 
 # Configure Nginx and reload
-sudo sed -i "s@IPTOCHANGE@$IP@g" ../conf/nginx.conf
+sudo sed -i "s@IPTOCHANGE@$ip@g" ../conf/nginx.conf
 sudo sed -i "s@PORT@$port@g" ../conf/nginx.conf
 sudo sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
