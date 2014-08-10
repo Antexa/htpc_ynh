@@ -1,9 +1,13 @@
 #!/bin/bash
 
 domain=$(sudo yunohost app setting cops domain)
+app=htpc
 
-sudo rm /etc/nginx/conf.d/$domain.d/cops.conf
-sudo rm -rf /var/www/cops
+sudo rm /etc/nginx/conf.d/$domain.d/$app.conf
+sudo service $app stop
+sudo update-rc.d $app remove
+sudo rm /etc/init.d/$app
+sudo rm -rf /opt/$app
 
 sudo service nginx reload
 sudo yunohost app ssowatconf 
