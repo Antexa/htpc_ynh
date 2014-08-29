@@ -49,6 +49,6 @@ sudo yunohost service add $app --log /var/log/$app/ --status "ps aux | grep $app
 sudo update-rc.d $app defaults
 
 # Reload $app, Nginx and regenerate SSOwat conf
-sudo service $app restart
+sudo service $app start
 sudo service nginx reload
 sudo yunohost app ssowatconf
