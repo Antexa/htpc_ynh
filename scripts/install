@@ -23,7 +23,7 @@ if [[ $ip == "127.0.0.1" ]]; then
   sudo cp -a ../conf/$app /etc/init.d/
   sudo chmod +x /etc/init.d/$app
   sudo sed -i "s@PATHTOCHANGE@$path@g" /etc/init.d/$app
-  sudo sed -i "s@PORT@$port@g" ../etc/ini.d/$app
+  sudo sed -i "s@PORT@$port@g" ../etc/init.d/$app
   sudo update-rc.d $app defaults
   sudo service $app start
 fi
