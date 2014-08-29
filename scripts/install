@@ -32,7 +32,7 @@ if [[ $ip == "127.0.0.1" ]]; then
 	sudo cp -a ../conf/$app /etc/init.d/
 	sudo chmod +x /etc/init.d/$app
 	sudo sed -i "s@PATHTOCHANGE@$path@g" /etc/init.d/$app
-	sudo sed -i "s@PORT@$port@g" ../etc/init.d/$app
+	sudo sed -i "s@PORT@$port@g" /etc/init.d/$app
 fi
 
 # Configure Nginx 
