@@ -12,13 +12,13 @@
 
 ############### EDIT ME ##################
 # path to app
-APP_PATH=/opt/htpc
+APP_PATH=/path/to/htpc-manager
 
 # path to python bin
 DAEMON=/usr/bin/python
 
 # startup args
-DAEMON_OPTS=' Htpc.py --webdir PATHTOCHANGE
+DAEMON_OPTS=" Htpc.py"
 
 # script name
 NAME=htpc
