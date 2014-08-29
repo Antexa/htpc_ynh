@@ -27,7 +27,7 @@ if [[ $ip == "127.0.0.1" ]]; then
 	
 	#Install the latest version of HTPC-Manager using the fork
 	sudo mkdir -p /opt/yunohost/$app
-	sudo git clone https://github.com/styxit/HTPC-Manager $app
+	sudo git clone https://github.com/styxit/HTPC-Manager /opt/yunohost/$app
 	
 	sudo cp -a ../conf/$app /etc/init.d/
 	sudo chmod +x /etc/init.d/$app

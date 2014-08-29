@@ -12,7 +12,7 @@
 
 ############### EDIT ME ##################
 # path to app
-APP_PATH=/opt/htpc
+APP_PATH=/opt/yunohost/htpc
 
 # path to python bin
 DAEMON=/usr/bin/python
